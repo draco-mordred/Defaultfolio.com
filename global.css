@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
 @layer base {
   .text-edge-outline {
     -webkit-text-stroke: 1px rgba(255,255,255,0.3);
@@ -21,6 +31,10 @@
 
 .gallery-float {
   animation: gallery-float 4s ease-in-out infinite;
+}
+
+.gallery-float-delayed {
+  animation-delay: -2s;
 }
 
 @media (prefers-reduced-motion: reduce) {

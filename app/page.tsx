@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
+import { AboutReveal } from "./components/about-reveal";
 import Particles from "./components/particles";
 
 const navigation = [
@@ -14,6 +15,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col justify-between w-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
+      <AboutReveal />
       <main className="flex-1 flex flex-col items-center justify-center px-6">
         <nav className="my-16 animate-fade-in">
           <ul className="flex items-center justify-center gap-4">
@@ -34,9 +36,14 @@ export default function Home() {
           quantity={100}
         />
         <div className="mb-8 animate-fade-in">
-          {/* Logo placeholder - add your logo image here */}
-          <div className="w-24 h-24 mx-auto rounded-lg border border-zinc-700 bg-zinc-900/50 flex items-center justify-center">
-            <span className="text-zinc-500 text-sm">Logo</span>
+          <div
+            role="img"
+            aria-label="Avalon Enterprises logo placeholder"
+            className="flex h-24 w-24 mx-auto items-center justify-center rounded-lg border border-zinc-700 bg-zinc-900/50"
+          >
+            <span aria-hidden="true" className="font-display text-6xl text-zinc-100">
+              A
+            </span>
           </div>
         </div>
         <h1 className="py-3.5 px-0.5 z-10 text-4xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
@@ -47,28 +54,52 @@ export default function Home() {
         <div className="my-16 text-center animate-fade-in">
           <h2 className="text-sm text-zinc-500 ">Welcome to my portfolio</h2>
         </div>
-        <a
-          href="https://sites.google.com/view/israel-oladele/home"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="View my Art gallery here (opens in a new tab)"
-          className="group gallery-float flex w-full max-w-sm items-center justify-between gap-6 rounded-xl border border-zinc-700/80 bg-zinc-950/85 px-5 py-4 text-left shadow-2xl shadow-black/50 backdrop-blur transition-colors hover:border-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-300"
-        >
-          <span>
-            <span className="block text-xs uppercase tracking-widest text-zinc-500">
-              Featured project
+        <div className="flex w-full flex-col items-center justify-center gap-5 animate-fade-in sm:flex-row sm:flex-wrap">
+          <a
+            href="https://sites.google.com/view/israel-oladele/home"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View my Art gallery here (opens in a new tab)"
+            className="group gallery-float flex w-full max-w-sm items-center justify-between gap-6 rounded-xl border border-zinc-700/80 bg-zinc-950/85 px-5 py-4 text-left shadow-2xl shadow-black/50 backdrop-blur transition-colors hover:border-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-300"
+          >
+            <span>
+              <span className="block text-xs uppercase tracking-widest text-zinc-500">
+                Featured project
+              </span>
+              <span className="mt-1 block text-lg font-semibold text-zinc-100">
+                Art gallery
+              </span>
+              <span className="mt-1 block text-sm text-zinc-400 group-hover:text-zinc-200">
+                View my Art gallery here
+              </span>
             </span>
-            <span className="mt-1 block text-lg font-semibold text-zinc-100">
-              Art gallery
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-950 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
             </span>
-            <span className="mt-1 block text-sm text-zinc-400 group-hover:text-zinc-200">
-              View my Art gallery here
+          </a>
+          <a
+            href="https://medloglms.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View my MedLog LMS here (opens in a new tab)"
+            className="group gallery-float gallery-float-delayed flex w-full max-w-sm items-center justify-between gap-6 rounded-xl border border-zinc-700/80 bg-zinc-950/85 px-5 py-4 text-left shadow-2xl shadow-black/50 backdrop-blur transition-colors hover:border-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-300"
+          >
+            <span>
+              <span className="block text-xs uppercase tracking-widest text-zinc-500">
+                Featured project
+              </span>
+              <span className="mt-1 block text-lg font-semibold text-zinc-100">
+                MedLog LMS
+              </span>
+              <span className="mt-1 block text-sm text-zinc-400 group-hover:text-zinc-200">
+                View my MedLog LMS here
+              </span>
             </span>
-          </span>
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-950 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-            <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
-          </span>
-        </a>
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-950 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
+            </span>
+          </a>
+        </div>
       </main>
 
       <footer className="w-full border-t border-zinc-800 bg-black/90 px-6 py-6 text-center text-sm text-zinc-500 animate-fade-in">
