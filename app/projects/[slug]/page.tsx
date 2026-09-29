@@ -4,9 +4,9 @@ import { Mdx } from "@/app/components/mdx";
 import { Header } from "./header";
 import "./mdx.css";
 import { ReportView } from "./view";
-import { Redis } from "@upstash/redis";
+import { getProjectPageviews } from "@/util/project-pageviews";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 type Props = {
   params: {
@@ -22,15 +22,8 @@ export default async function PostPage({ params }: Props) {
     notFound();
   }
 
-  let views = 0;
-  try {
-    const redis = Redis.fromEnv();
-    views = (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0;
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.warn("Redis unavailable for project page, falling back to 0 views:", err);
-    views = 0;
-  }
+  const pageviews = await getProjectPageviews([slug]);
+  const views = pageviews[slug] ?? 0;
 
   return (
     <div className="bg-zinc-50 min-h-screen">

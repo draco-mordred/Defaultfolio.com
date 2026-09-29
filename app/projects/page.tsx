@@ -5,31 +5,12 @@ import { allProjects } from "contentlayer/generated";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { Article } from "./article";
-import { Redis } from "@upstash/redis";
 import { ArrowUpRight, Eye } from "lucide-react";
+import { getProjectPageviews } from "@/util/project-pageviews";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 export default async function ProjectsPage() {
-  let views: Record<string, number> = {};
-  try {
-    const redis = Redis.fromEnv();
-    const vals = await redis.mget<number[]>(
-      ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
-    );
-    views = vals.reduce((acc, v, i) => {
-      acc[allProjects[i].slug] = v ?? 0;
-      return acc;
-    }, {} as Record<string, number>);
-  } catch (err) {
-    // If Redis isn't configured or URL parsing fails, log and fall back to zeros.
-    // This prevents a crash on missing/invalid UPSTASH env vars during local dev.
-    // eslint-disable-next-line no-console
-    console.warn("Redis unavailable, falling back to zero pageviews:", err);
-    views = allProjects.reduce((acc, p) => {
-      acc[p.slug] = 0;
-      return acc;
-    }, {} as Record<string, number>);
-  }
+  const views = await getProjectPageviews(allProjects.map((project) => project.slug));
 
   const featured = allProjects.find((project) => project.slug === "unkey")!;
   const top2 = allProjects.find((project) => project.slug === "planetfall")!;
@@ -54,7 +35,7 @@ export default async function ProjectsPage() {
     );
 
   return (
-    <div className="relative pb-16">
+    <div className="projects-page-enter relative pb-16">
       <Navigation />
       <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl mx-auto lg:mx-0">
@@ -177,21 +158,11 @@ export default async function ProjectsPage() {
           <div className="flex flex-col w-full gap-8 mx-auto border-t border-gray-900/10 lg:mx-0 lg:border-t-0 ">
             {[top2, top3].map((project) => (
               <Card key={project.slug}>
-                {topOverrides[project.slug]?.external ? (
-                  <a
-                    href={topOverrides[project.slug]!.external}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
-                    <Article
-                      project={{ ...project, title: topOverrides[project.slug]?.title ?? project.title }}
-                      views={views[project.slug] ?? 0}
-                    />
-                  </a>
-                ) : (
-                  <Article project={project} views={views[project.slug] ?? 0} />
-                )}
+                <Article
+                  project={{ ...project, title: topOverrides[project.slug]?.title ?? project.title }}
+                  views={views[project.slug] ?? 0}
+                  externalHref={topOverrides[project.slug]?.external}
+                />
               </Card>
             ))}
           </div>

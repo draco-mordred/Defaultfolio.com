@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
+import { SiteFooter } from "./components/site-footer";
 
 export const metadata: Metadata = {
   title: {
@@ -66,10 +67,11 @@ export default function RootLayout({
         <Analytics />
       </head>
       <body
-        className={`bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+        className={`flex min-h-screen flex-col bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
           }`}
       >
-        {children}
+        <div className="flex flex-1 flex-col pb-20">{children}</div>
+        <SiteFooter />
       </body>
     </html>
   );

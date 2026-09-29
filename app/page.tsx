@@ -11,10 +11,8 @@ const navigation = [
 ];
 
 export default function Home() {
-  const year = new Date().getFullYear();
-
   return (
-    <div className="flex min-h-screen flex-col justify-between w-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
+    <div className="flex flex-1 flex-col justify-between w-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
       <AboutReveal />
       <main className="flex-1 flex flex-col items-center justify-center px-6">
         <nav className="my-16 animate-fade-in">
@@ -33,7 +31,7 @@ export default function Home() {
         <div className="hidden w-full h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
         <Particles
           className="absolute inset-0 -z-10 animate-fade-in"
-          quantity={100}
+          quantity={48}
         />
         <div className="mb-8 animate-fade-in">
           <div
@@ -102,19 +100,6 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="w-full border-t border-zinc-800 bg-black/90 px-6 py-6 text-center text-sm text-zinc-500 animate-fade-in">
-        <div className="mx-auto flex flex-wrap items-center justify-center gap-6 max-w-3xl">
-          <span className="transition duration-300 ease-out hover:text-white hover:-translate-y-0.5 hover:scale-105">
-            © {year} Avalon Enterprises
-          </span>
-          <Link
-            href="#policy"
-            className="transition duration-300 ease-out hover:text-white hover:-translate-y-0.5 hover:scale-105"
-          >
-            Policy
-          </Link>
-        </div>
-      </footer>
     </div>
   );
 }
