@@ -8,3 +8,24 @@
   }
 } 
 
+@keyframes gallery-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.gallery-float {
+  animation: gallery-float 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-float {
+    animation: none;
+  }
+}
+

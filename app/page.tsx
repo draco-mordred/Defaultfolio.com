@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { ArrowUpRight } from "lucide-react";
 import Particles from "./components/particles";
 
 const navigation = [
@@ -44,8 +45,30 @@ export default function Home() {
 
         <div className="hidden w-full h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
         <div className="my-16 text-center animate-fade-in">
-          <h2 className="text-sm text-zinc-500 ">Welcome to my port folio</h2>
+          <h2 className="text-sm text-zinc-500 ">Welcome to my portfolio</h2>
         </div>
+        <a
+          href="https://sites.google.com/view/israel-oladele/home"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View my Art gallery here (opens in a new tab)"
+          className="group gallery-float flex w-full max-w-sm items-center justify-between gap-6 rounded-xl border border-zinc-700/80 bg-zinc-950/85 px-5 py-4 text-left shadow-2xl shadow-black/50 backdrop-blur transition-colors hover:border-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-300"
+        >
+          <span>
+            <span className="block text-xs uppercase tracking-widest text-zinc-500">
+              Featured project
+            </span>
+            <span className="mt-1 block text-lg font-semibold text-zinc-100">
+              Art gallery
+            </span>
+            <span className="mt-1 block text-sm text-zinc-400 group-hover:text-zinc-200">
+              View my Art gallery here
+            </span>
+          </span>
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-950 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+            <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
+          </span>
+        </a>
       </main>
 
       <footer className="w-full border-t border-zinc-800 bg-black/90 px-6 py-6 text-center text-sm text-zinc-500 animate-fade-in">
