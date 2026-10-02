@@ -35,9 +35,9 @@ export default async function ProjectsPage() {
     );
 
   return (
-    <div className="projects-page-enter relative pb-16">
+    <div className="projects-page-enter relative isolate z-0 pb-16">
       <Navigation />
-      <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
+      <div className="relative z-10 mx-auto max-w-7xl space-y-8 px-6 pt-20 lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Projects
@@ -62,6 +62,7 @@ export default async function ProjectsPage() {
                     src="/medlog.png"
                     alt=""
                     fill
+                    priority
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="scale-110 object-cover opacity-25 mix-blend-screen blur-[2px] transition duration-700 group-hover:scale-[1.15]"
                   />
@@ -71,6 +72,7 @@ export default async function ProjectsPage() {
                       src="/medlog.png"
                       alt="MedLog logo"
                       fill
+                      loading="lazy"
                       sizes="(max-width: 640px) 160px, 208px"
                       className="object-contain mix-blend-screen drop-shadow-2xl"
                     />

@@ -1,63 +1,132 @@
 "use client";
-import { Github, Mail, Twitter } from "lucide-react";
+
+import { motion } from "framer-motion";
+import { Github, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import Link from "next/link";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 
-const socials = [
-	{
-		icon: <Twitter size={20} />,
-		href: "https://twitter.com/draco-mordred",
-		label: "Twitter",
-		handle: "@draco-mordred",
-	},
-	{
-		icon: <Mail size={20} />,
-		href: "mailto:israelmicheal227@gmail.com",
-		label: "israelmicheal227@gmail.com",
-		handle: "israelmicheal227@gmail.com",
-	},
-	{
-		icon: <Github size={20} />,
-		href: "https://github.com/draco-mordred",
-		label: "Draco-Mordred",
-		handle: "Draco-Mordred",
-	},
+const contactLinks = [
+  {
+    icon: <Mail size={20} />,
+    href: "mailto:israelmicheal227@gmail.com",
+    label: "Email",
+    value: "israelmicheal227@gmail.com",
+    size: "wide",
+  },
+  {
+    icon: <Twitter size={20} />,
+    href: "https://twitter.com/DracoMordred",
+    label: "Twitter",
+    value: "@DracoMordred",
+    size: "small",
+  },
+    {
+    icon: <MapPin size={20} />,
+    href: "https://maps.google.com/?q=Jos,+Nigeria",
+    label: "Location",
+    value: "Jos, Nigeria (Remote)",
+    size: "wide",
+  },
+  {
+    icon: <Phone size={20} />,
+    href: "tel:+2349067604081",
+    label: "Phone",
+    value: "+234 906 760 4081",
+    size: "small",
+  },
+
+  {
+    icon: <Github size={20} />,
+    href: "https://github.com/draco-mordred",
+    label: "GitHub",
+    value: "draco-mordred",
+    size: "small",
+  },
+  {
+    icon: <Mail size={20} />,
+    href: "https://www.linkedin.com",
+    label: "LinkedIn",
+    value: "linkedin.com/in/israel-oladele",
+    size: "wide",
+  },
 ];
 
-export default function Example() {
-	return (
-		<div className=" bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
-			<Navigation />
-			<div className="container flex items-center justify-center min-h-screen px-4 mx-auto">
-				<div className="grid w-full grid-cols-1 gap-8 mx-auto mt-32 sm:mt-0 sm:grid-cols-3 lg:gap-16">
-					{socials.map((s) => (
-						<Card>
-							<Link
-								href={s.href}
-								target="_blank"
-								className="p-4 relative flex flex-col items-center gap-4 duration-700 group md:gap-8 md:py-24  lg:pb-48  md:p-16"
-							>
-								<span
-									className="absolute w-px h-2/3 bg-gradient-to-b from-zinc-500 via-zinc-500/50 to-transparent"
-									aria-hidden="true"
-								/>
-								<span className="relative z-10 flex items-center justify-center w-12 h-12 text-sm duration-1000 border rounded-full text-zinc-200 group-hover:text-white group-hover:bg-zinc-900 border-zinc-500 bg-zinc-900 group-hover:border-zinc-200 drop-shadow-orange">
-									{s.icon}
-								</span>{" "}
-								<div className="z-10 flex w-full min-w-0 flex-col items-center">
-									<span className="max-w-full break-words text-center text-base font-medium duration-150 text-zinc-200 group-hover:text-white font-display sm:text-lg xl:text-2xl">
-										{s.handle}
-									</span>
-									<span className="mt-4 text-sm text-center duration-1000 text-zinc-400 group-hover:text-zinc-200">
-										{s.label}
-									</span>
-								</div>
-							</Link>
-						</Card>
-					))}
-				</div>
-			</div>
-		</div>
-	);
+export default function ContactPage() {
+  const rows = Array.from({ length: Math.ceil(contactLinks.length / 2) }, (_, rowIndex) => {
+    const first = contactLinks[rowIndex * 2];
+    const second = contactLinks[rowIndex * 2 + 1];
+    const startsWithWide = rowIndex % 2 === 0;
+
+    return {
+      first: { ...first, isWide: startsWithWide },
+      second: second ? { ...second, isWide: !startsWithWide } : null,
+    };
+  });
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0"
+    >
+      <Navigation />
+      <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-20">
+        <div className="mt-20 grid w-full auto-rows-[minmax(180px,auto)] grid-cols-1 gap-6 md:grid-cols-3">
+          {rows.map((row, rowIndex) => (
+            <>
+              {row.first && (
+                <div key={`${row.first.label}-first-${rowIndex}`} className={row.first.isWide ? "md:col-span-2" : "md:col-span-1"}>
+                  <Card>
+                    <Link
+                      href={row.first.href}
+                      target={row.first.href.startsWith("http") ? "_blank" : undefined}
+                      rel={row.first.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="group relative flex h-full min-h-[180px] flex-col items-center justify-center gap-4 p-6 text-center duration-700"
+                    >
+                      <span className="absolute left-1/2 top-0 h-2/3 w-px -translate-x-1/2 bg-gradient-to-b from-zinc-500 via-zinc-500/50 to-transparent" aria-hidden="true" />
+                      <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-500 bg-zinc-900 text-zinc-200 transition-colors duration-300 group-hover:border-zinc-200 group-hover:text-white">
+                        {row.first.icon}
+                      </span>
+                      <div className="z-10 space-y-2">
+                        <p className="text-[10px] uppercase tracking-[0.22em] text-zinc-500">{row.first.label}</p>
+                        <p className="break-words text-sm font-medium text-zinc-200 group-hover:text-white sm:text-base">
+                          {row.first.value}
+                        </p>
+                      </div>
+                    </Link>
+                  </Card>
+                </div>
+              )}
+
+              {row.second && (
+                <div key={`${row.second.label}-second-${rowIndex}`} className={row.second.isWide ? "md:col-span-2" : "md:col-span-1"}>
+                  <Card>
+                    <Link
+                      href={row.second.href}
+                      target={row.second.href.startsWith("http") ? "_blank" : undefined}
+                      rel={row.second.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="group relative flex h-full min-h-[180px] flex-col items-center justify-center gap-4 p-6 text-center duration-700"
+                    >
+                      <span className="absolute left-1/2 top-0 h-2/3 w-px -translate-x-1/2 bg-gradient-to-b from-zinc-500 via-zinc-500/50 to-transparent" aria-hidden="true" />
+                      <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-500 bg-zinc-900 text-zinc-200 transition-colors duration-300 group-hover:border-zinc-200 group-hover:text-white">
+                        {row.second.icon}
+                      </span>
+                      <div className="z-10 space-y-2">
+                        <p className="text-[10px] uppercase tracking-[0.22em] text-zinc-500">{row.second.label}</p>
+                        <p className="break-words text-sm font-medium text-zinc-200 group-hover:text-white sm:text-base">
+                          {row.second.value}
+                        </p>
+                      </div>
+                    </Link>
+                  </Card>
+                </div>
+              )}
+            </>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
 }

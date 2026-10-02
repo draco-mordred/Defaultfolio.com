@@ -227,7 +227,11 @@ export default function Particles({
 	};
 
 	return (
-		<div className={className} ref={canvasContainerRef} aria-hidden="true">
+		<div
+			className={`${className} pointer-events-none z-0`}
+			ref={canvasContainerRef}
+			aria-hidden="true"
+		>
 			<canvas ref={canvasRef} />
 		</div>
 	);

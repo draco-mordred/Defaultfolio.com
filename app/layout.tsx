@@ -62,12 +62,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+    <html lang="en" className={[inter.variable, calSans.variable, "font-sans"].join(" ")}>
       <head>
         <Analytics />
       </head>
       <body
-        className={`flex min-h-screen flex-col bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+        className={`flex min-h-screen flex-col bg-black font-sans antialiased ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
           }`}
       >
         <div className="flex flex-1 flex-col pb-20">{children}</div>
