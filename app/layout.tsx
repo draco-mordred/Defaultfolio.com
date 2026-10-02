@@ -62,12 +62,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={[inter.variable, calSans.variable, "font-sans"].join(" ")}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      data-theme="dark"
+      className={[inter.variable, calSans.variable, "font-sans"].join(" ")}
+    >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const storedTheme = localStorage.getItem('theme');
+                const preferredTheme = storedTheme || 'dark';
+                document.documentElement.setAttribute('data-theme', preferredTheme);
+              } catch (e) {}
+            `,
+          }}
+        />
         <Analytics />
       </head>
       <body
-        className={`flex min-h-screen flex-col bg-black font-sans antialiased ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+        className={`flex min-h-screen flex-col bg-[var(--bg)] font-sans antialiased ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
           }`}
       >
         <div className="flex flex-1 flex-col pb-20">{children}</div>

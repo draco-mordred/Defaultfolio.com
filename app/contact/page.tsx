@@ -40,14 +40,14 @@ const contactLinks = [
     icon: <Github size={20} />,
     href: "https://github.com/draco-mordred",
     label: "GitHub",
-    value: "draco-mordred",
+    value: "@draco-mordred",
     size: "small",
   },
   {
     icon: <Mail size={20} />,
     href: "https://www.linkedin.com",
     label: "LinkedIn",
-    value: "linkedin.com/in/israel-oladele",
+    value: "@israel-oladele",
     size: "wide",
   },
 ];
@@ -69,29 +69,29 @@ export default function ContactPage() {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0"
+      className="min-h-screen"
     >
       <Navigation />
       <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-20">
         <div className="mt-20 grid w-full auto-rows-[minmax(180px,auto)] grid-cols-1 gap-6 md:grid-cols-3">
           {rows.map((row, rowIndex) => (
-            <>
+            <div key={`row-${rowIndex}`} className="contents">
               {row.first && (
                 <div key={`${row.first.label}-first-${rowIndex}`} className={row.first.isWide ? "md:col-span-2" : "md:col-span-1"}>
-                  <Card>
+                  <Card themeAware>
                     <Link
                       href={row.first.href}
                       target={row.first.href.startsWith("http") ? "_blank" : undefined}
                       rel={row.first.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="group relative flex h-full min-h-[180px] flex-col items-center justify-center gap-4 p-6 text-center duration-700"
                     >
-                      <span className="absolute left-1/2 top-0 h-2/3 w-px -translate-x-1/2 bg-gradient-to-b from-zinc-500 via-zinc-500/50 to-transparent" aria-hidden="true" />
-                      <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-500 bg-zinc-900 text-zinc-200 transition-colors duration-300 group-hover:border-zinc-200 group-hover:text-white">
-                        {row.first.icon}
+                      <span className="absolute left-1/2 top-0 h-2/3 w-px -translate-x-1/2 bg-gradient-to-b from-[var(--muted)] via-[var(--border)] to-transparent" aria-hidden="true" />
+                      <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-[10px] border border-[var(--border)] bg-[var(--surface-strong)]/50 text-[var(--text)] backdrop-blur-[5px] transition-colors duration-300 group-hover:border-[var(--outline)] group-hover:text-[var(--text)]">
+                        <span className="opacity-50">{row.first.icon}</span>
                       </span>
                       <div className="z-10 space-y-2">
-                        <p className="text-[10px] uppercase tracking-[0.22em] text-zinc-500">{row.first.label}</p>
-                        <p className="break-words text-sm font-medium text-zinc-200 group-hover:text-white sm:text-base">
+                        <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--muted)]">{row.first.label}</p>
+                        <p className="break-words text-sm font-medium text-[var(--text)] sm:text-base">
                           {row.first.value}
                         </p>
                       </div>
@@ -102,20 +102,20 @@ export default function ContactPage() {
 
               {row.second && (
                 <div key={`${row.second.label}-second-${rowIndex}`} className={row.second.isWide ? "md:col-span-2" : "md:col-span-1"}>
-                  <Card>
+                  <Card themeAware>
                     <Link
                       href={row.second.href}
                       target={row.second.href.startsWith("http") ? "_blank" : undefined}
                       rel={row.second.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="group relative flex h-full min-h-[180px] flex-col items-center justify-center gap-4 p-6 text-center duration-700"
                     >
-                      <span className="absolute left-1/2 top-0 h-2/3 w-px -translate-x-1/2 bg-gradient-to-b from-zinc-500 via-zinc-500/50 to-transparent" aria-hidden="true" />
-                      <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-500 bg-zinc-900 text-zinc-200 transition-colors duration-300 group-hover:border-zinc-200 group-hover:text-white">
-                        {row.second.icon}
+                      <span className="absolute left-1/2 top-0 h-2/3 w-px -translate-x-1/2 bg-gradient-to-b from-[var(--muted)] via-[var(--border)] to-transparent" aria-hidden="true" />
+                      <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-[10px] border border-[var(--border)] bg-[var(--surface-strong)]/50 text-[var(--text)] backdrop-blur-[5px] transition-colors duration-300 group-hover:border-[var(--outline)] group-hover:text-[var(--text)]">
+                        <span className="opacity-50">{row.second.icon}</span>
                       </span>
                       <div className="z-10 space-y-2">
-                        <p className="text-[10px] uppercase tracking-[0.22em] text-zinc-500">{row.second.label}</p>
-                        <p className="break-words text-sm font-medium text-zinc-200 group-hover:text-white sm:text-base">
+                        <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--muted)]">{row.second.label}</p>
+                        <p className="break-words text-sm font-medium text-[var(--text)] sm:text-base">
                           {row.second.value}
                         </p>
                       </div>
@@ -123,7 +123,7 @@ export default function ContactPage() {
                   </Card>
                 </div>
               )}
-            </>
+            </div>
           ))}
         </div>
       </div>

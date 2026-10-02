@@ -71,28 +71,28 @@ function FeaturedProjectCard({
               delay: index * 0.4,
             }
       }
-      className="group relative flex w-full max-w-[22rem] scale-90 items-center justify-between gap-6 rounded-xl border border-zinc-700/80 bg-zinc-950/85 px-5 py-4 text-left shadow-2xl shadow-black/50 backdrop-blur transition-colors hover:border-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-300"
+      className="group relative flex w-full max-w-[22rem] scale-90 items-center justify-between gap-6 rounded-xl border border-[var(--home-card-border)] bg-[var(--home-card-bg)] px-5 py-4 text-left text-[var(--text)] shadow-2xl shadow-black/20 backdrop-blur transition-colors hover:border-[var(--outline)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--home-accent)]"
     >
       <motion.span
         animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
         transition={{ duration: 0.24, ease: "easeOut" }}
-        className="pointer-events-none absolute -top-12 right-3 z-20 w-40 rounded-xl border border-zinc-700/80 bg-zinc-950/90 px-2 py-1 text-[10px] font-medium text-zinc-200 shadow-xl shadow-black/40"
+        className="pointer-events-none absolute -top-12 right-3 z-20 w-40 rounded-xl border border-[var(--home-tooltip-border)] bg-[var(--home-tooltip-bg)] px-2 py-1 text-[10px] font-medium text-[var(--text)] shadow-xl shadow-black/20 backdrop-blur"
       >
         {project.detail}
       </motion.span>
 
       <span>
-        <span className="block text-xs uppercase tracking-widest text-zinc-500">
+        <span className="block text-xs uppercase tracking-widest text-[var(--muted)]">
           Featured project
         </span>
-        <span className="mt-1 block text-lg font-semibold text-zinc-100">
+        <span className="mt-1 block text-lg font-semibold text-[var(--text)]">
           {project.name}
         </span>
-        <span className="mt-1 block text-sm text-zinc-400 group-hover:text-zinc-200">
+        <span className="mt-1 block text-sm text-[var(--text-soft)] group-hover:text-[var(--text)]">
           {project.label}
         </span>
       </span>
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-950 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--home-arrow-bg)] text-[var(--home-arrow-text)] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
         <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
       </span>
     </motion.a>
@@ -100,14 +100,16 @@ function FeaturedProjectCard({
 }
 
 export default function Home() {
+  const [isContentRevealed, setIsContentRevealed] = useState(false);
+
   return (
-    <div className="flex w-screen flex-1 flex-col justify-between overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
-      <AboutReveal />
+    <div className={`home-page-background flex w-screen flex-1 flex-col justify-between overflow-hidden ${isContentRevealed ? "home-content-revealed" : ""}`}>
+      <AboutReveal isPageRevealed={isContentRevealed} />
       <main className="relative z-10 flex flex-1 flex-col items-center justify-center px-6">
         <motion.nav
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 2.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-20 my-16"
           style={{ perspective: 1000, marginTop: "-16rem" }}
         >
@@ -116,7 +118,7 @@ export default function Home() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm text-zinc-500 duration-500 hover:text-zinc-300"
+                className="text-sm text-[var(--text-soft)] duration-500 hover:text-[var(--text)]"
               >
                 {item.name}
               </Link>
@@ -132,7 +134,7 @@ export default function Home() {
         /> */}
 
         <Particles
-          className="absolute inset-0 -z-10"
+          className="home-particles absolute inset-0 -z-10"
           quantity={108}
         />
 
@@ -143,19 +145,21 @@ export default function Home() {
           className="relative mb-8"
         >
           <motion.div
-            initial={{ opacity: 0, y: 260, scale: 0.45 }}
+            initial={{ opacity: 0, x: -220, y: -240, scale: 0.45, rotate: -14 }}
             animate={{
               opacity: 1,
-              y: [260, 180, 80, 0],
-              scale: [0.45, 0.75, 1.08, 1],
+              x: [-220, -125, -70, -18, 28, 0],
+              y: [-240, 50, -24, 34, -60, 0],
+              scale: [0.45, 1.03, 0.95, 1.03, 0.94, 1],
+              rotate: [-14, 5, -4, 2, -1, 0],
             }}
             transition={{
-              duration: 1.7,
-              ease: [0.22, 1, 0.36, 1],
-              times: [0, 0.38, 0.72, 1],
+              duration: 2.35,
+              ease: ["easeIn", "easeOut", "easeIn", "easeOut", "easeOut"],
+              times: [0, 0.38, 0.55, 0.7, 0.86, 1],
               delay: 0.1,
             }}
-            className="relative flex h-[10.75rem] w-[10.75rem] items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/80 shadow-[0_0_30px_rgba(255,255,255,0.08)]"
+            className="relative flex h-[10.75rem] w-[10.75rem] items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-strong)] shadow-[var(--home-logo-shadow)]"
             role="img"
             aria-label="Avalon Enterprises logo placeholder"
           >
@@ -163,13 +167,13 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: [0, 0.7, 0], scale: [0.9, 1.8, 2.2] }}
               transition={{
-                delay: 1.2,
-                duration: 1,
+                delay: 2.35,
+                duration: 0.9,
                 ease: "easeOut",
               }}
-              className="absolute inset-[-11px] rounded-full border border-zinc-300/35"
+              className="absolute inset-[-11px] rounded-full border border-[var(--home-ripple-border)]"
             />
-            <span aria-hidden="true" className="font-display text-[2.69rem] text-zinc-100">
+            <span aria-hidden="true" className="font-display text-[2.69rem] text-[var(--text)]">
               A
             </span>
           </motion.div>
@@ -178,8 +182,8 @@ export default function Home() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.45, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="z-10 flex flex-col items-center justify-center whitespace-nowrap bg-clip-text bg-white text-center font-display text-transparent text-edge-outline"
+          transition={{ delay: 2.65, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="z-10 flex flex-col items-center justify-center whitespace-nowrap bg-clip-text bg-[var(--home-title-color)] text-center font-display text-transparent text-edge-outline"
           style={{ width: "-webkit-fill-available"}}
         >
           <span className="block text-4xl sm:text-6xl md:text-9xl">Avalon</span>
@@ -192,24 +196,25 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ delay: 1.6, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden h-px w-full bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block"
+          transition={{ delay: 2.85, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden h-px w-full bg-gradient-to-r from-[var(--border)] via-[var(--outline)] to-[var(--border)] md:block"
         />
 
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 3.05, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mt-10 text-center md:mt-12"
         >
-          <h2 className="text-md text-zinc-500">My portfolio</h2>
+          <h2 className="text-md text-[var(--text-soft)]">My portfolio</h2>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.95, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute bottom-0 left-0 right-0 mt-4 flex w-full flex-col items-center justify-center gap-5 sm:flex-row sm:flex-wrap"
+          transition={{ delay: 3.25, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          onAnimationComplete={() => setIsContentRevealed(true)}
+          className="absolute bottom-14 left-0 right-0 mt-4 flex w-full flex-col items-center justify-center gap-5 sm:flex-row sm:flex-wrap"
         >
           {projectCards.map((project, index) => (
             <FeaturedProjectCard key={project.name} project={project} index={index} />

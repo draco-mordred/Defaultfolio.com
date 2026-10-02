@@ -35,21 +35,22 @@ export default async function ProjectsPage() {
     );
 
   return (
-    <div className="projects-page-enter relative isolate z-0 pb-16">
+    <>
       <Navigation />
-      <div className="relative z-10 mx-auto max-w-7xl space-y-8 px-6 pt-20 lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
+      <div className="projects-page-enter relative isolate z-0 pb-16">
+        <div className="relative z-10 mx-auto max-w-7xl space-y-8 px-6 pt-20 lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl mx-auto lg:mx-0">
-          <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-[var(--text)] sm:text-4xl">
             Projects
           </h2>
-          <p className="mt-4 text-zinc-400">
+          <p className="mt-4 text-[var(--text-soft)]">
             Some of the projects are from work and some are on my own time.
           </p>
         </div>
-        <div className="w-full h-px bg-zinc-800" />
+        <div className="w-full h-px bg-[var(--border)]" />
 
         <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2 ">
-          <Card>
+          <Card themeAware>
             {topOverrides[featured.slug]?.external ? (
               <a
                 href={topOverrides[featured.slug]!.external}
@@ -66,20 +67,20 @@ export default async function ProjectsPage() {
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="scale-110 object-cover opacity-25 mix-blend-screen blur-[2px] transition duration-700 group-hover:scale-[1.15]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-zinc-950/30" />
-                  <div className="absolute right-3 top-10 h-40 w-40 sm:right-6 sm:top-8 sm:h-52 sm:w-52">
+                  <div className="project-image-overlay absolute inset-0" />
+                  <div className="absolute right-3 top-10 h-20 w-20 overflow-hidden rounded-[10px] border border-[var(--border)] bg-[var(--surface)]/50 p-3 backdrop-blur-[10px] sm:right-6 sm:top-8 sm:h-[6.5rem] sm:w-[6.5rem]">
                     <Image
                       src="/medlog.png"
                       alt="MedLog logo"
                       fill
                       loading="lazy"
                       sizes="(max-width: 640px) 160px, 208px"
-                      className="object-contain mix-blend-screen drop-shadow-2xl"
+                      className="rounded-[10px] object-contain opacity-50 mix-blend-screen drop-shadow-2xl"
                     />
                   </div>
                   <div className="relative z-10 flex min-h-[360px] flex-col p-4 md:p-8">
                     <div className="flex items-center justify-between gap-2">
-                      <div className="text-xs text-zinc-100">
+                      <div className="text-xs text-[var(--project-feature-soft)]">
                         {featured.date ? (
                           <time dateTime={new Date(featured.date).toISOString()}>
                             {Intl.DateTimeFormat(undefined, {
@@ -90,8 +91,8 @@ export default async function ProjectsPage() {
                           <span>SOON</span>
                         )}
                       </div>
-                      <span className="flex items-center gap-1 text-xs text-zinc-300">
-                        <Eye className="w-4 h-4" />{" "}
+                      <span className="flex items-center gap-1 text-xs text-[var(--project-feature-soft)]">
+                        <Eye className="w-2 h-2" />{" "}
                         {Intl.NumberFormat("en-US", { notation: "compact" }).format(
                           views[featured.slug] ?? 0,
                         )}
@@ -100,16 +101,16 @@ export default async function ProjectsPage() {
                     <div className="mt-auto max-w-xs">
                       <h2
                         id="featured-post"
-                        className="text-3xl font-bold text-white sm:text-4xl font-display"
+                        className="text-3xl font-bold text-[var(--project-feature-text)] sm:text-4xl font-display"
                       >
                         {topOverrides[featured.slug]?.title ?? featured.title}
                       </h2>
-                      <p className="mt-3 leading-7 text-zinc-300">
+                      <p className="mt-3 leading-7 text-[var(--project-feature-soft)]">
                         {featured.description}
                       </p>
-                      <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-white">
+                      <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[var(--project-feature-text)]">
                         Visit MedLog LMS
-                        <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                        <ArrowUpRight className="h-2 w-2" aria-hidden="true" />
                       </span>
                     </div>
                   </div>
@@ -119,7 +120,7 @@ export default async function ProjectsPage() {
               <Link href={`/projects/${featured.slug}`}>
                 <article className="relative w-full h-full p-4 md:p-8">
                   <div className="flex items-center justify-between gap-2">
-                    <div className="text-xs text-zinc-100">
+                    <div className="text-xs text-[var(--text-soft)]">
                       {featured.date ? (
                         <time dateTime={new Date(featured.date).toISOString()}>
                           {Intl.DateTimeFormat(undefined, {
@@ -130,8 +131,8 @@ export default async function ProjectsPage() {
                         <span>SOON</span>
                       )}
                     </div>
-                    <span className="flex items-center gap-1 text-xs text-zinc-500">
-                      <Eye className="w-4 h-4" />{" "}
+                    <span className="flex items-center gap-1 text-xs text-[var(--muted)]">
+                      <Eye className="w-2 h-2" />{" "}
                       {Intl.NumberFormat("en-US", { notation: "compact" }).format(
                         views[featured.slug] ?? 0,
                       )}
@@ -140,15 +141,15 @@ export default async function ProjectsPage() {
 
                   <h2
                     id="featured-post"
-                    className="mt-4 text-3xl font-bold text-zinc-100 group-hover:text-white sm:text-4xl font-display"
+                    className="mt-4 text-3xl font-bold text-[var(--text)] group-hover:text-[var(--text)] sm:text-4xl font-display"
                   >
                     {featured.title}
                   </h2>
-                  <p className="mt-4 leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300">
+                  <p className="mt-4 leading-8 duration-150 text-[var(--text-soft)] group-hover:text-[var(--text)]">
                     {featured.description}
                   </p>
                   <div className="absolute bottom-4 md:bottom-8">
-                    <p className="hidden text-zinc-200 hover:text-zinc-50 lg:block">
+                    <p className="hidden text-[var(--text)] hover:text-[var(--text-soft)] lg:block">
                       Read more <span aria-hidden="true">→</span>
                     </p>
                   </div>
@@ -159,7 +160,7 @@ export default async function ProjectsPage() {
 
           <div className="flex flex-col w-full gap-8 mx-auto border-t border-gray-900/10 lg:mx-0 lg:border-t-0 ">
             {[top2, top3].map((project) => (
-              <Card key={project.slug}>
+              <Card key={project.slug} themeAware>
                 <Article
                   project={{ ...project, title: topOverrides[project.slug]?.title ?? project.title }}
                   views={views[project.slug] ?? 0}
@@ -169,14 +170,14 @@ export default async function ProjectsPage() {
             ))}
           </div>
         </div>
-        <div className="hidden w-full h-px md:block bg-zinc-800" />
+        <div className="hidden w-full h-px md:block bg-[var(--border)]" />
 
         <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3">
           <div className="grid grid-cols-1 gap-4">
             {sorted
               .filter((_, i) => i % 3 === 0)
               .map((project) => (
-                <Card key={project.slug}>
+                <Card key={project.slug} themeAware>
                   <Article project={project} views={views[project.slug] ?? 0} />
                 </Card>
               ))}
@@ -185,7 +186,7 @@ export default async function ProjectsPage() {
             {sorted
               .filter((_, i) => i % 3 === 1)
               .map((project) => (
-                <Card key={project.slug}>
+                <Card key={project.slug} themeAware>
                   <Article project={project} views={views[project.slug] ?? 0} />
                 </Card>
               ))}
@@ -194,13 +195,14 @@ export default async function ProjectsPage() {
             {sorted
               .filter((_, i) => i % 3 === 2)
               .map((project) => (
-                <Card key={project.slug}>
+                <Card key={project.slug} themeAware>
                   <Article project={project} views={views[project.slug] ?? 0} />
                 </Card>
               ))}
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
