@@ -23,7 +23,14 @@ const masteredSkills = [
 ];
 
 const areasOfFocus = [
+  `Web Development`,
+  `AI Learning`,
+  `Medical Education`,
+  `Clinical Medicine`,
+  `Medical Research`,
   "AI Evaluation",
+  `Illustrations`,
+  
   "LLM QA",
   "Prompt Engineering",
   "Data Annotation",
@@ -127,7 +134,7 @@ function SkillMarquee({ label, items, showIcons = false }: MarqueeProps) {
   };
 
   return (
-    <div className="mx-auto mt-4 max-w-3xl overflow-hidden">
+    <div className="mx-auto mt-4 w-full overflow-hidden sm:w-[92%] md:w-[86%] lg:w-4/5 xl:w-3/4">
       <div
         className={`skill-marquee${isTouching || isHovered || isFocused ? " is-touching" : ""}`}
         role="group"

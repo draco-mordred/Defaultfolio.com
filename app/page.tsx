@@ -54,65 +54,66 @@ function NavigationLinks({ mobile = false }: { mobile?: boolean }) {
 
 export default function Home() {
   return (
-    <div className="home-page-background home-content-revealed relative isolate flex w-full flex-1 flex-col items-center overflow-hidden px-4 pb-24 pt-5 sm:px-6 sm:pb-28 sm:pt-8">
+    <div className="home-page-background home-content-revealed relative isolate flex w-full flex-1 flex-col items-center overflow-x-clip pb-[4.25rem] sm:pb-28">
       <Particles
         className="home-particles pointer-events-none absolute inset-0 -z-10"
         quantity={90}
       />
 
-      <main className="relative z-10 my-auto w-full max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl shadow-black/20 backdrop-blur-xl">
-        <header className="flex min-h-16 items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3 sm:px-7">
-          <div className="flex min-w-0 items-center gap-2.5">
-            <AboutReveal />
-            <Link href="/" className="min-w-0">
-              <span className="block truncate text-sm font-semibold text-[var(--text)]">
-                Israel Oladele
-              </span>
-              <span className="block truncate text-xs text-[var(--muted)]">
-                draco-mordred
-              </span>
-            </Link>
-          </div>
+      <header className="home-wide-sticky-nav sticky top-0 z-50 flex min-h-16 w-full items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3 sm:px-7 lg:px-8">
+        <div className="flex min-w-0 items-center gap-2.5">
+          <AboutReveal />
+          <Link href="/" className="min-w-0">
+            <span className="block truncate text-sm font-semibold text-[var(--text)]">
+              Israel Oladele
+            </span>
+            <span className="block truncate text-xs text-[var(--muted)]">
+              draco-mordred
+            </span>
+          </Link>
+        </div>
 
-          <nav
-            aria-label="Main navigation"
-            className="hidden items-center gap-6 sm:flex"
+        <nav
+          aria-label="Main navigation"
+          className="hidden items-center gap-6 sm:flex"
+        >
+          <NavigationLinks />
+          <ThemeToggle />
+          <Link
+            href="/contact"
+            className="rounded-full bg-[var(--text)] px-4 py-2 text-sm font-semibold text-[var(--bg)] transition hover:opacity-80"
           >
-            <NavigationLinks />
-            <ThemeToggle />
+            Hire Me
+          </Link>
+        </nav>
+
+        <ThemeToggle className="sm:hidden" />
+
+        <details className="group relative sm:hidden">
+          <summary
+            aria-label="Toggle navigation menu"
+            className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-[var(--border)] text-[var(--text)] [&::-webkit-details-marker]:hidden"
+          >
+            <Menu className="h-5 w-5 group-open:hidden" aria-hidden="true" />
+            <X className="hidden h-5 w-5 group-open:block" aria-hidden="true" />
+          </summary>
+          <nav
+            aria-label="Mobile navigation"
+            className="absolute right-0 top-12 z-20 grid min-w-44 gap-1 rounded-xl border border-[var(--border)] bg-[var(--bg-strong)] p-2 shadow-xl"
+          >
+            <NavigationLinks mobile />
             <Link
               href="/contact"
-              className="rounded-full bg-[var(--text)] px-4 py-2 text-sm font-semibold text-[var(--bg)] transition hover:opacity-80"
+              className="rounded-lg bg-[var(--text)] px-3 py-2 text-sm font-semibold text-[var(--bg)]"
             >
               Hire Me
             </Link>
           </nav>
+        </details>
+      </header>
 
-          <ThemeToggle className="sm:hidden" />
-
-          <details className="group relative sm:hidden">
-            <summary
-              aria-label="Toggle navigation menu"
-              className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-[var(--border)] text-[var(--text)] [&::-webkit-details-marker]:hidden"
-            >
-              <Menu className="h-5 w-5 group-open:hidden" aria-hidden="true" />
-              <X className="hidden h-5 w-5 group-open:block" aria-hidden="true" />
-            </summary>
-            <nav
-              aria-label="Mobile navigation"
-              className="absolute right-0 top-12 z-20 grid min-w-44 gap-1 rounded-xl border border-[var(--border)] bg-[var(--bg-strong)] p-2 shadow-xl"
-            >
-              <NavigationLinks mobile />
-              <Link
-                href="/contact"
-                className="rounded-lg bg-[var(--text)] px-3 py-2 text-sm font-semibold text-[var(--bg)]"
-              >
-                Hire Me
-              </Link>
-            </nav>
-          </details>
-        </header>
-
+      <div className="relative z-10 mt-4 w-[calc(100%-2rem)] max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl shadow-black/20 backdrop-blur-xl sm:mt-0 sm:w-[calc(100%-3rem)] lg:my-6 lg:w-full lg:max-w-none lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:shadow-none lg:backdrop-blur-none">
+        <main className="lg:mx-6 lg:w-[calc(100%-3rem)] lg:overflow-hidden lg:rounded-2xl lg:border lg:border-[var(--border)] lg:bg-[var(--surface)] lg:shadow-2xl lg:shadow-black/20 lg:backdrop-blur-xl">
         <section className="px-5 pb-8 pt-9 text-center sm:px-10 sm:pb-10 sm:pt-12">
           <div className="relative mx-auto h-20 w-20 overflow-hidden rounded-full border border-[var(--outline)] bg-[var(--surface-strong)] shadow-[var(--home-logo-shadow)] ring-4 ring-white/[0.03] sm:h-24 sm:w-24">
             <Image
@@ -124,13 +125,13 @@ export default function Home() {
             />
           </div>
           <p className="mt-5 text-xs font-medium uppercase tracking-[0.24em] text-[var(--muted)]">
-            Full-stack Developer · AI evaluator · creative technologist
+            Full-stack Developer · AI evaluator · Medical Doctor
           </p>
           <h1 className="mt-2 font-display text-3xl font-bold tracking-tight text-[var(--text)] sm:text-5xl">
             Israel Oladele
           </h1>
           <p className="mt-2 text-sm text-[var(--text-soft)]">
-            aka draco-mordred
+            - draco-mordred
           </p>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-[var(--text-soft)] sm:text-base">
             AI Evaluator &amp; Medical Student — improving AI quality through
@@ -206,7 +207,8 @@ export default function Home() {
             ))}
           </div>
         </section>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

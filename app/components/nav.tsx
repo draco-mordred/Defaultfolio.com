@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, Moon, SunMedium } from "lucide-react";
+import { Menu, Moon, SunMedium, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -123,26 +124,75 @@ function TransitionNavLink({ href, children }: { href: string; children: string 
 export function Navigation() {
 	return (
 		<header className="site-glass-surface site-navigation-glass fixed inset-x-0 top-0 z-[60] bg-black/20 backdrop-blur-xl">
-			<div className="container relative z-10 mx-auto flex flex-row-reverse items-center justify-between px-6 py-2.5">
-				<div className="flex items-center justify-between gap-8">
-					<Link
-						href="/projects"
-            className="duration-200 text-[var(--text-soft)] hover:text-[var(--text)]"
-					>
-						Projects
-					</Link>
-					<TransitionNavLink href="/about">About</TransitionNavLink>
-					<TransitionNavLink href="/contact">Contact</TransitionNavLink>
-				</div>
+			<div className="container relative z-10 mx-auto flex items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
+				<Link
+					href="/"
+					aria-label="Israel Oladele — home"
+					className="flex min-w-0 shrink-0 items-center gap-2.5 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--home-accent)]"
+				>
+					<span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full border border-[var(--border)] bg-[var(--surface-strong)] shadow-[var(--home-logo-shadow)]">
+						<Image
+							src="https://github.com/draco-mordred.png?size=256"
+							alt=""
+							fill
+							sizes="36px"
+							className="object-cover"
+						/>
+					</span>
+					<span className="min-w-0">
+						<span className="block truncate text-sm font-semibold text-[var(--text)]">
+							Israel Oladele
+						</span>
+						<span className="block truncate text-xs text-[var(--muted)]">
+							draco-mordred
+						</span>
+					</span>
+				</Link>
 
-				<div className="flex items-center gap-3">
+				<div className="flex shrink-0 items-center gap-2 sm:gap-3">
+					<nav aria-label="Main navigation" className="hidden items-center gap-6 md:flex">
+						<Link
+							href="/projects"
+							className="text-sm text-[var(--text-soft)] transition-colors hover:text-[var(--text)]"
+						>
+							Projects
+						</Link>
+						<TransitionNavLink href="/about">About</TransitionNavLink>
+						<TransitionNavLink href="/contact">Contact</TransitionNavLink>
+					</nav>
 					<ThemeToggle />
-					<Link
-						href="/"
-            className="duration-200 text-[var(--text-soft)] hover:text-[var(--text)]"
-					>
-						<ArrowLeft className="h-6 w-6" />
-					</Link>
+					<details className="group relative md:hidden">
+						<summary
+							aria-label="Toggle navigation menu"
+							className="flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-full border border-[var(--border)] text-[var(--text)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--home-accent)] [&::-webkit-details-marker]:hidden"
+						>
+							<Menu className="h-5 w-5 group-open:hidden" aria-hidden="true" />
+							<X className="hidden h-5 w-5 group-open:block" aria-hidden="true" />
+						</summary>
+						<nav
+							aria-label="Mobile navigation"
+							className="absolute right-0 top-12 z-20 grid min-w-44 gap-1 rounded-xl border border-[var(--border)] bg-[var(--bg-strong)] p-2 shadow-xl"
+						>
+							<Link
+								href="/projects"
+								className="rounded-lg px-3 py-2 text-sm text-[var(--text-soft)] hover:bg-[var(--surface)] hover:text-[var(--text)]"
+							>
+								Projects
+							</Link>
+							<Link
+								href="/about"
+								className="rounded-lg px-3 py-2 text-sm text-[var(--text-soft)] hover:bg-[var(--surface)] hover:text-[var(--text)]"
+							>
+								About
+							</Link>
+							<Link
+								href="/contact"
+								className="rounded-lg px-3 py-2 text-sm text-[var(--text-soft)] hover:bg-[var(--surface)] hover:text-[var(--text)]"
+							>
+								Contact
+							</Link>
+						</nav>
+					</details>
 				</div>
 			</div>
 		</header>

@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     default: name,
     template: `%s | ${name}`,
   },
-  description: `${name} — Full-stack Developer, AI evaluator, medical student, and creative technologist.`,
+  description: `${name} — Full-stack Developer, Medical student, AI evaluator, and Creative technologist.`,
   openGraph: {
     title: name,
-    description: `${name} — AI evaluator, medical student, and creative technologist.`,
+    description: `${name} — Medical doctor, AI evaluator, and creative technologist.`,
     url: "https://defaultfolio.com",
     siteName: "Israel Oladele",
     images: [
