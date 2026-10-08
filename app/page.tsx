@@ -51,7 +51,7 @@ function NavigationLinks({ mobile = false }: { mobile?: boolean }) {
     </>
   );
 }
-
+  
 export default function Home() {
   return (
     <div className="home-page-background home-content-revealed relative isolate flex w-full flex-1 flex-col items-center overflow-x-clip pb-[4.25rem] sm:pb-28">
