@@ -275,13 +275,11 @@ html[data-theme="light"] .home-particles canvas {
 
 .skill-track {
   display: inline-flex;
-  gap: 0.75rem;
   padding-bottom: 2px;
   align-items: center;
   white-space: nowrap; /* keep items on one line */
   flex-wrap: nowrap;
-  /* make the track wide enough and animate translateX to -50% for a smooth loop */
-  animation: marquee 20s linear infinite;
+  width: max-content;
   will-change: transform;
 }
 
@@ -290,6 +288,13 @@ html[data-theme="light"] .home-particles canvas {
   flex: 0 0 auto; /* ensure each item keeps its own width and doesn't shrink */
   white-space: nowrap; /* ensure text inside doesn't wrap */
   cursor: pointer;
+}
+
+.skill-track-set {
+  flex: 0 0 auto;
+  gap: 0.75rem;
+  padding-right: 0.75rem;
+  white-space: nowrap;
 }
 
 .skill-icon-surface {
@@ -308,23 +313,8 @@ html[data-theme="light"] .home-particles canvas {
   }
 }
 
-.skill-marquee.is-touching .skill-track {
+.skill-marquee.is-touching .skill-track,
+.skill-marquee:hover .skill-track,
+.skill-marquee:focus-within .skill-track {
   animation-play-state: paused;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* Pause marquee when user prefers reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .skill-track {
-    animation: none;
-  }
 }
