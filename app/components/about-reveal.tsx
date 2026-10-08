@@ -6,14 +6,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-export function AboutReveal({ isPageRevealed }: { isPageRevealed: boolean }) {
+export function AboutReveal() {
   const [isOpen, setIsOpen] = useState(false);
   const [profileImageFailed, setProfileImageFailed] = useState(false);
   const openButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const reduceMotion = useReducedMotion();
   const duration = reduceMotion ? 0 : 0.85;
-  const clipOrigin = "calc(100% - 40px) 40px";
+  const clipOrigin = "40px 40px";
 
   useEffect(() => {
     if (!isOpen) return;
@@ -39,29 +39,21 @@ export function AboutReveal({ isPageRevealed }: { isPageRevealed: boolean }) {
       <button
         ref={openButtonRef}
         type="button"
+        aria-label="Meet Israel Oladele"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-controls="about-reveal"
         onClick={() => setIsOpen(true)}
-        className={`fixed right-5 top-5 z-40 flex flex-col items-center gap-2 text-[var(--text)] transition-[opacity,transform,visibility] duration-500 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--home-accent)] sm:right-8 sm:top-7 ${isPageRevealed ? "visible opacity-100" : "invisible pointer-events-none opacity-0"}`}
+        className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[var(--border)] bg-[var(--surface-strong)] shadow-[var(--home-logo-shadow)] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--home-accent)]"
       >
-        <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-[var(--border)] bg-[var(--surface-strong)] shadow-lg shadow-black/20 backdrop-blur">
-          {profileImageFailed ? (
-            <User className="h-5 w-5" aria-hidden="true" />
-          ) : (
-            <Image
-              src="https://github.com/draco-mordred.png?size=512"
-              alt=""
-              fill
-              sizes="48px"
-              className="object-cover"
-              onError={() => setProfileImageFailed(true)}
-            />
-          )}
-        </span>
-        <span className="rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--text-soft)] shadow-lg shadow-black/20">
-          Meet me
-        </span>
+        <Image
+          src="https://github.com/draco-mordred.png?size=256"
+          alt="Israel Oladele"
+          width={36}
+          height={36}
+          className="h-full w-full object-cover"
+          onError={() => setProfileImageFailed(true)}
+        />
       </button>
 
       <AnimatePresence>

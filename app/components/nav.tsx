@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-function ThemeToggle() {
+export function ThemeToggle({ className = "" }: { className?: string }) {
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const reduceMotion = useReducedMotion();
@@ -55,7 +55,7 @@ function ThemeToggle() {
       aria-label="Toggle theme"
       aria-pressed={!isDark}
       onClick={toggleTheme}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] transition hover:border-[var(--outline)] hover:text-[var(--text)]"
+      className={`flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] transition hover:border-[var(--outline)] hover:text-[var(--text)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--home-accent)] ${className}`}
     >
       {mounted && !isDark ? <Moon className="h-4 w-4" /> : <SunMedium className="h-4 w-4" />}
     </button>

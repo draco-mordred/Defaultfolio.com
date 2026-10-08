@@ -1,25 +1,25 @@
 import "../global.css";
-import { Inter } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 import { SiteFooter } from "./components/site-footer";
 
+var name = "Israel Oladele"
+
 export const metadata: Metadata = {
   title: {
-    default: "Avalon Enterprises",
-    template: "%s | Avalon Enterprises",
+    default: name,
+    template: `%s | ${name}`,
   },
-  description: "Avalon Enterprises - Portfolio & Projects", // Kontora Black  Madani Arabic Semi Bold
+  description: `${name} — Full-stack Developer, AI evaluator, medical student, and creative technologist.`,
   openGraph: {
-    title: "Avalon Enterprises",
-    description:
-      "Avalon Enterprises - Portfolio & Projects",
-    url: "https://defaultfolio.com", //"https://chronark.com",
-    siteName: "Avalon Enterprises",
+    title: name,
+    description: `${name} — AI evaluator, medical student, and creative technologist.`,
+    url: "https://defaultfolio.com",
+    siteName: "Israel Oladele",
     images: [
       {
-        url: "/public/og-avalon-enterprises.png", //"https://chronark.com/og.png",
+        url: "/og.png",
         width: 1920,
         height: 1080,
       },
@@ -39,18 +39,13 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Avalon Enterprises",
+    title: "Israel Oladele",
     card: "summary_large_image",
   },
   icons: {
     shortcut: "/favicon.png",
   },
 };
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
 const calSans = LocalFont({
   src: "../public/fonts/CalSans-SemiBold.ttf",
   variable: "--font-calsans",
@@ -66,7 +61,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-theme="dark"
-      className={[inter.variable, calSans.variable, "font-sans"].join(" ")}
+      className={[calSans.variable, "font-sans"].join(" ")}
     >
       <head>
         <script
@@ -86,7 +81,7 @@ export default function RootLayout({
         className={`flex min-h-screen flex-col bg-[var(--bg)] font-sans antialiased ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
           }`}
       >
-        <div className="flex flex-1 flex-col pb-20">{children}</div>
+        <div className="flex flex-1 flex-col">{children}</div>
         <SiteFooter />
       </body>
     </html>

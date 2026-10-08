@@ -1,225 +1,211 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { AboutReveal } from "./components/about-reveal";
+import {
+  ArrowUpRight,
+  Github,
+  Menu,
+  X,
+} from "lucide-react";
 import Particles from "./components/particles";
+import { SkillsCarousel } from "./components/skills-carousel";
+import { AboutReveal } from "./components/about-reveal";
+import { ThemeToggle } from "./components/nav";
 
 const navigation = [
-  { name: "Projects", href: "/projects" },
-  { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
+  { label: "Projects", href: "/projects" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
-const projectCards = [
-  {
-    name: "Art gallery",
-    href: "https://sites.google.com/view/israel-oladele/home",
-    label: "View my Art gallery here",
-    aria: "View my Art gallery here (opens in a new tab)",
-    detail: "A curated collection of art and visual work.",
-  },
+const featuredProjects = [
   {
     name: "MedLog LMS",
+    description:
+      "A learning management system for medical learners, teachers, and administrators.",
     href: "https://medloglms.vercel.app",
-    label: "View my MedLog LMS here",
-    aria: "View my MedLog LMS here (opens in a new tab)",
-    detail: "A learning platform built for practice and growth.",
+    tags: ["Medical education", "LMS", "Learning tools"],
+  },
+  {
+    name: "Art Gallery",
+    description:
+      "A curated online gallery for showcasing digital illustrations and visual work.",
+    href: "https://sites.google.com/view/israel-oladele/home",
+    tags: ["Illustration", "Digital art", "Creative"],
   },
 ];
 
-function FeaturedProjectCard({
-  project,
-  index,
-}: {
-  project: (typeof projectCards)[number];
-  index: number;
-}) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleHoverStart = () => {
-    setIsHovered(true);
-  };
-
-  const handleHoverEnd = () => {
-    setIsHovered(false);
-  };
-
+function NavigationLinks({ mobile = false }: { mobile?: boolean }) {
   return (
-
-    <motion.a
-      key={project.name}
-      href={project.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={project.aria}
-      onHoverStart={handleHoverStart}
-      onHoverEnd={handleHoverEnd}
-      onFocus={handleHoverStart}
-      onBlur={handleHoverEnd}
-      initial={{ y: 0 }}
-      animate={isHovered ? { y: 0 } : { y: [0, -7, 0, -3.5, 0] }}
-      transition={
-        isHovered
-          ? { duration: 0.22, ease: "easeOut" }
-          : {
-              duration: 3.8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: index * 0.4,
-            }
-      }
-      className="group relative flex w-full max-w-[22rem] scale-90 items-center justify-between gap-6 rounded-xl border border-[var(--home-card-border)] bg-[var(--home-card-bg)] px-5 py-4 text-left text-[var(--text)] shadow-2xl shadow-black/20 backdrop-blur transition-colors hover:border-[var(--outline)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--home-accent)]"
-    >
-      <motion.span
-        animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-        transition={{ duration: 0.24, ease: "easeOut" }}
-        className="pointer-events-none absolute -top-12 right-3 z-20 w-40 rounded-xl border border-[var(--home-tooltip-border)] bg-[var(--home-tooltip-bg)] px-2 py-1 text-[10px] font-medium text-[var(--text)] shadow-xl shadow-black/20 backdrop-blur"
-      >
-        {project.detail}
-      </motion.span>
-
-      <span>
-        <span className="block text-xs uppercase tracking-widest text-[var(--muted)]">
-          Featured project
-        </span>
-        <span className="mt-1 block text-lg font-semibold text-[var(--text)]">
-          {project.name}
-        </span>
-        <span className="mt-1 block text-sm text-[var(--text-soft)] group-hover:text-[var(--text)]">
-          {project.label}
-        </span>
-      </span>
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--home-arrow-bg)] text-[var(--home-arrow-text)] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-        <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
-      </span>
-    </motion.a>
+    <>
+      {navigation.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          className={`text-sm text-[var(--text-soft)] transition-colors hover:text-[var(--text)] ${
+            mobile ? "rounded-lg px-3 py-2 hover:bg-[var(--surface)]" : ""
+          }`}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </>
   );
 }
 
 export default function Home() {
-  const [isContentRevealed, setIsContentRevealed] = useState(false);
-
   return (
-    <div className={`home-page-background flex w-screen flex-1 flex-col justify-between overflow-hidden ${isContentRevealed ? "home-content-revealed" : ""}`}>
-      <AboutReveal isPageRevealed={isContentRevealed} />
-      <main className="relative z-10 flex flex-1 flex-col items-center justify-center px-6">
-        <motion.nav
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-20 my-16"
-          style={{ perspective: 1000, marginTop: "-16rem" }}
-        >
-          <ul className="flex items-center justify-center gap-4">
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm text-[var(--text-soft)] duration-500 hover:text-[var(--text)]"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </ul>
-        </motion.nav>
+    <div className="home-page-background home-content-revealed relative isolate flex w-full flex-1 flex-col items-center overflow-hidden px-4 pb-24 pt-5 sm:px-6 sm:pb-28 sm:pt-8">
+      <Particles
+        className="home-particles pointer-events-none absolute inset-0 -z-10"
+        quantity={90}
+      />
 
-        {/* <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ delay: 1.6, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden h-px w-full bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block"
-        /> */}
+      <main className="relative z-10 my-auto w-full max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl shadow-black/20 backdrop-blur-xl">
+        <header className="flex min-h-16 items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3 sm:px-7">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <AboutReveal />
+            <Link href="/" className="min-w-0">
+              <span className="block truncate text-sm font-semibold text-[var(--text)]">
+                Israel Oladele
+              </span>
+              <span className="block truncate text-xs text-[var(--muted)]">
+                draco-mordred
+              </span>
+            </Link>
+          </div>
 
-        <Particles
-          className="home-particles absolute inset-0 -z-10"
-          quantity={108}
-        />
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          className="relative mb-8"
-        >
-          <motion.div
-            initial={{ opacity: 0, x: -220, y: -240, scale: 0.45, rotate: -14 }}
-            animate={{
-              opacity: 1,
-              x: [-220, -125, -70, -18, 28, 0],
-              y: [-240, 50, -24, 34, -60, 0],
-              scale: [0.45, 1.03, 0.95, 1.03, 0.94, 1],
-              rotate: [-14, 5, -4, 2, -1, 0],
-            }}
-            transition={{
-              duration: 2.35,
-              ease: ["easeIn", "easeOut", "easeIn", "easeOut", "easeOut"],
-              times: [0, 0.38, 0.55, 0.7, 0.86, 1],
-              delay: 0.1,
-            }}
-            className="relative flex h-[10.75rem] w-[10.75rem] items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-strong)] shadow-[var(--home-logo-shadow)]"
-            role="img"
-            aria-label="Avalon Enterprises logo placeholder"
+          <nav
+            aria-label="Main navigation"
+            className="hidden items-center gap-6 sm:flex"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: [0, 0.7, 0], scale: [0.9, 1.8, 2.2] }}
-              transition={{
-                delay: 2.35,
-                duration: 0.9,
-                ease: "easeOut",
-              }}
-              className="absolute inset-[-11px] rounded-full border border-[var(--home-ripple-border)]"
+            <NavigationLinks />
+            <ThemeToggle />
+            <Link
+              href="/contact"
+              className="rounded-full bg-[var(--text)] px-4 py-2 text-sm font-semibold text-[var(--bg)] transition hover:opacity-80"
+            >
+              Hire Me
+            </Link>
+          </nav>
+
+          <ThemeToggle className="sm:hidden" />
+
+          <details className="group relative sm:hidden">
+            <summary
+              aria-label="Toggle navigation menu"
+              className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-[var(--border)] text-[var(--text)] [&::-webkit-details-marker]:hidden"
+            >
+              <Menu className="h-5 w-5 group-open:hidden" aria-hidden="true" />
+              <X className="hidden h-5 w-5 group-open:block" aria-hidden="true" />
+            </summary>
+            <nav
+              aria-label="Mobile navigation"
+              className="absolute right-0 top-12 z-20 grid min-w-44 gap-1 rounded-xl border border-[var(--border)] bg-[var(--bg-strong)] p-2 shadow-xl"
+            >
+              <NavigationLinks mobile />
+              <Link
+                href="/contact"
+                className="rounded-lg bg-[var(--text)] px-3 py-2 text-sm font-semibold text-[var(--bg)]"
+              >
+                Hire Me
+              </Link>
+            </nav>
+          </details>
+        </header>
+
+        <section className="px-5 pb-8 pt-9 text-center sm:px-10 sm:pb-10 sm:pt-12">
+          <div className="relative mx-auto h-20 w-20 overflow-hidden rounded-full border border-[var(--outline)] bg-[var(--surface-strong)] shadow-[var(--home-logo-shadow)] ring-4 ring-white/[0.03] sm:h-24 sm:w-24">
+            <Image
+              src="https://github.com/draco-mordred.png?size=512"
+              alt="Israel Oladele"
+              fill
+              sizes="(max-width: 768px) 5rem, 6rem"
+              className="object-cover"
             />
-            <span aria-hidden="true" className="font-display text-[2.69rem] text-[var(--text)]">
-              A
-            </span>
-          </motion.div>
-        </motion.div>
+          </div>
+          <p className="mt-5 text-xs font-medium uppercase tracking-[0.24em] text-[var(--muted)]">
+            Full-stack Developer · AI evaluator · creative technologist
+          </p>
+          <h1 className="mt-2 font-display text-3xl font-bold tracking-tight text-[var(--text)] sm:text-5xl">
+            Israel Oladele
+          </h1>
+          <p className="mt-2 text-sm text-[var(--text-soft)]">
+            aka draco-mordred
+          </p>
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-[var(--text-soft)] sm:text-base">
+            AI Evaluator &amp; Medical Student — improving AI quality through
+            careful evaluation, research, and creative problem-solving.
+          </p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.65, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="z-10 flex flex-col items-center justify-center whitespace-nowrap bg-clip-text bg-[var(--home-title-color)] text-center font-display text-transparent text-edge-outline"
-          style={{ width: "-webkit-fill-available"}}
+          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link
+              href="/projects"
+              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-[var(--text)] px-5 py-2.5 text-sm font-semibold text-[var(--bg)] transition hover:opacity-80"
+            >
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              View Projects
+            </Link>
+            <a
+              href="https://github.com/draco-mordred"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-[var(--border)] px-5 py-2.5 text-sm font-medium text-[var(--text)] transition hover:border-[var(--outline)] hover:bg-[var(--surface-strong)]"
+            >
+              <Github className="h-4 w-4" aria-hidden="true" />
+              GitHub
+            </a>
+          </div>
+        </section>
+
+        <SkillsCarousel />
+
+        <section
+          id="featured-projects"
+          aria-labelledby="featured-heading"
+          className="border-t border-[var(--border)] px-5 pb-7 pt-6 sm:px-10 sm:pb-9"
         >
-          <span className="block text-4xl sm:text-6xl md:text-9xl">Avalon</span>
-          <span className="mt-1 block text-[1.8em] leading-none tracking-[0.08em] sm:text-[1.8em] md:text-[1.8em]">
-            Enterprises
-          </span>
-        </motion.h1>
-
-        <br />
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ delay: 2.85, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden h-px w-full bg-gradient-to-r from-[var(--border)] via-[var(--outline)] to-[var(--border)] md:block"
-        />
-
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 3.05, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-10 text-center md:mt-12"
-        >
-          <h2 className="text-md text-[var(--text-soft)]">My portfolio</h2>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 3.25, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          onAnimationComplete={() => setIsContentRevealed(true)}
-          className="absolute bottom-14 left-0 right-0 mt-4 flex w-full flex-col items-center justify-center gap-5 sm:flex-row sm:flex-wrap"
-        >
-          {projectCards.map((project, index) => (
-            <FeaturedProjectCard key={project.name} project={project} index={index} />
-          ))}
-        </motion.div>
+          <h2
+            id="featured-heading"
+            className="text-center font-display text-xl font-semibold text-[var(--text)] sm:text-2xl"
+          >
+            Featured Projects
+          </h2>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 sm:gap-4">
+            {featuredProjects.map((project) => (
+              <a
+                key={project.name}
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-xl border border-[var(--home-card-border)] bg-[var(--home-card-bg)] p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-[var(--outline)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--home-accent)] sm:p-5"
+              >
+                <span className="flex items-start justify-between gap-3">
+                  <span className="font-display text-base font-semibold text-[var(--text)] sm:text-lg">
+                    {project.name}
+                  </span>
+                  <ArrowUpRight
+                    className="mt-0.5 h-4 w-4 shrink-0 text-[var(--muted)] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--text)]"
+                    aria-hidden="true"
+                  />
+                </span>
+                <span className="mt-2 block text-sm leading-5 text-[var(--text-soft)]">
+                  {project.description}
+                </span>
+                <span className="mt-4 flex flex-wrap gap-1.5">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded px-2 py-1 text-[10px] font-semibold text-[var(--text)]"
+                      style={{ backgroundColor: "var(--home-arrow-bg)", color: "var(--home-arrow-text)" }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );
