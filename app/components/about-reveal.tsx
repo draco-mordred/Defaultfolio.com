@@ -195,7 +195,12 @@ export function AboutReveal() {
 														<strong className="font-semibold text-[var(--text)]">
 															AI evaluator
 														</strong>
-														, and medical professional who brings technology,
+														, and{" "}
+														<strong className="font-semibold text-[var(--text)]">
+															Medical professional
+														</strong>
+														{" "}
+														who brings technology,
 														careful reasoning, and creativity together to make
 														useful things.
 													</p>

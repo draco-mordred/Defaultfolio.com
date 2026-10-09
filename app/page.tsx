@@ -54,7 +54,7 @@ function NavigationLinks({ mobile = false }: { mobile?: boolean }) {
   
 export default function Home() {
   return (
-    <div className="home-page-background home-content-revealed relative isolate flex w-full flex-1 flex-col items-center overflow-x-clip pb-[4.25rem] sm:pb-28">
+    <div className="home-page-background home-content-revealed relative isolate flex w-full flex-1 flex-col items-center overflow-x-clip pb-[1.75rem] sm:pb-14">
       <Particles
         className="home-particles pointer-events-none absolute inset-0 -z-10"
         quantity={90}
@@ -112,9 +112,9 @@ export default function Home() {
         </details>
       </header>
 
-      <div className="relative z-10 mt-4 w-[calc(100%-2rem)] max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl shadow-black/20 backdrop-blur-xl sm:mt-0 sm:w-[calc(100%-3rem)] lg:my-6 lg:w-full lg:max-w-none lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:shadow-none lg:backdrop-blur-none">
+      <div className="relative z-10 mt-3 w-[calc(100%-1.25rem)] max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl shadow-black/20 backdrop-blur-xl pt-3 sm:mt-4 sm:w-[calc(100%-2rem)] sm:pt-4 md:mt-6 md:w-[calc(100%-2.5rem)] md:pt-5 lg:my-6 lg:w-full lg:max-w-none lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:pt-0 lg:shadow-none lg:backdrop-blur-none">
         <main className="lg:mx-6 lg:w-[calc(100%-3rem)] lg:overflow-hidden lg:rounded-2xl lg:border lg:border-[var(--border)] lg:bg-[var(--surface)] lg:shadow-2xl lg:shadow-black/20 lg:backdrop-blur-xl">
-        <section className="px-5 pb-8 pt-9 text-center sm:px-10 sm:pb-10 sm:pt-12">
+        <section className="px-4 pb-7 pt-7 text-center sm:px-8 sm:pb-8 sm:pt-10 md:px-10 md:pb-9 md:pt-11 lg:pt-12">
           <div className="relative mx-auto h-20 w-20 overflow-hidden rounded-full border border-[var(--outline)] bg-[var(--surface-strong)] shadow-[var(--home-logo-shadow)] ring-4 ring-white/[0.03] sm:h-24 sm:w-24">
             <Image
               src="https://github.com/draco-mordred.png?size=512"

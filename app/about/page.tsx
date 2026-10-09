@@ -38,15 +38,19 @@ export default function AboutPage() {
             <h2 className="text-xl font-bold text-[var(--text)]">Core strengths</h2>
             <div className="mt-4 flex flex-wrap gap-2 text-sm text-[var(--text)]">
               {[
-                "AI Evaluation",
-                "LLM QA",
-                "Prompt Engineering",
-                "Data Annotation",
-                "Python",
-                "JavaScript",
-                "Digital Art",
-                "Fact-checking",
-                "Research",
+      `Web Development`,
+      `AI Learning`,
+      `Medical Education`,
+      `Clinical Medicine`,
+      `Medical Research`,
+      "AI Evaluation",
+      `Illustrations`,
+      "LLM QA",
+      "Prompt Engineering",
+      "Data Annotation",
+      "Digital Art",
+      "Fact-checking",
+      "Research",
               ].map((skill) => (
                 <span
                   key={skill}

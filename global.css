@@ -271,11 +271,25 @@ html[data-theme="light"] .home-particles canvas {
   }
 }
 
-/* Continuous marquee for the Areas of focus carousel */
+/* Continuous marquee for the areas-of-focus and skills carousels */
 .skill-marquee {
   width: 100%;
   overflow: hidden;
   border-radius: 0.5rem;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
 }
 
 .skill-marquee:focus-visible {
@@ -285,25 +299,21 @@ html[data-theme="light"] .home-particles canvas {
 
 .skill-track {
   display: inline-flex;
-  padding-bottom: 2px;
   align-items: center;
-  white-space: nowrap; /* keep items on one line */
+  white-space: nowrap;
   flex-wrap: nowrap;
   width: max-content;
+  min-width: max-content;
+  animation: marquee-scroll 24s linear infinite;
   will-change: transform;
 }
 
-.skill-track > * {
-  display: inline-flex;
-  flex: 0 0 auto; /* ensure each item keeps its own width and doesn't shrink */
-  white-space: nowrap; /* ensure text inside doesn't wrap */
-  cursor: pointer;
-}
-
 .skill-track-set {
+  display: inline-flex;
+  align-items: center;
   flex: 0 0 auto;
   gap: 0.75rem;
-  padding-right: 0.75rem;
+  padding-right: 0.9rem;
   white-space: nowrap;
 }
 
@@ -312,19 +322,24 @@ html[data-theme="light"] .home-particles canvas {
   color: var(--skill-icon-color);
 }
 
-/* Pause on hover-capable desktop devices and whenever keyboard-focused. */
-.skill-marquee:focus-within .skill-track {
-  animation-play-state: paused;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .skill-marquee:hover .skill-track {
-    animation-play-state: paused;
-  }
-}
-
-.skill-marquee.is-touching .skill-track,
+.skill-marquee.is-paused .skill-track,
 .skill-marquee:hover .skill-track,
 .skill-marquee:focus-within .skill-track {
   animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-track {
+    animation: none;
+  }
 }
