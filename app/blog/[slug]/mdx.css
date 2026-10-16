@@ -1,0 +1,73 @@
+.blog-article-content .mdx {
+	color: var(--text-soft);
+	font-size: 1.0625rem;
+	line-height: 1.85;
+}
+
+.blog-article-content .mdx h1,
+.blog-article-content .mdx h2,
+.blog-article-content .mdx h3,
+.blog-article-content .mdx h4,
+.blog-article-content .mdx h5,
+.blog-article-content .mdx h6 {
+	color: var(--text);
+}
+
+.blog-article-content .mdx h2 {
+	margin-top: 2.5rem;
+	font-size: 1.5rem;
+	font-weight: 650;
+}
+
+.blog-article-content .mdx h3 {
+	margin-top: 2rem;
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.blog-article-content .mdx p,
+.blog-article-content .mdx ul,
+.blog-article-content .mdx ol {
+	margin-top: 1.25rem;
+}
+
+.blog-article-content .mdx ul {
+	list-style: disc;
+	padding-left: 1.5rem;
+}
+
+.blog-article-content .mdx ol {
+	list-style: decimal;
+	padding-left: 1.5rem;
+}
+
+.blog-article-content .mdx li {
+	margin-top: 0.5rem;
+}
+
+.blog-article-content .mdx a {
+	color: var(--text);
+	text-decoration: underline;
+	text-decoration-color: var(--muted);
+	text-underline-offset: 0.2em;
+}
+
+.blog-article-content .mdx blockquote {
+	margin-top: 1.5rem;
+	border-left: 2px solid var(--outline);
+	padding-left: 1.25rem;
+	color: var(--text-soft);
+}
+
+.blog-article-content .mdx pre {
+	margin-top: 1.5rem;
+	overflow-x: auto;
+	border: 1px solid var(--border);
+	border-radius: 0.75rem;
+	background: var(--bg-strong);
+	padding: 1rem 0;
+}
+
+.blog-article-content .mdx [data-rehype-pretty-code-fragment] code {
+	color: var(--text);
+}

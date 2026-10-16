@@ -157,6 +157,7 @@ export function Navigation() {
 						>
 							Projects
 						</Link>
+						<TransitionNavLink href="/blog">Blog</TransitionNavLink>
 						<TransitionNavLink href="/about">About</TransitionNavLink>
 						<TransitionNavLink href="/contact">Contact</TransitionNavLink>
 					</nav>
@@ -178,6 +179,12 @@ export function Navigation() {
 								className="rounded-lg px-3 py-2 text-sm text-[var(--text-soft)] hover:bg-[var(--surface)] hover:text-[var(--text)]"
 							>
 								Projects
+							</Link>
+							<Link
+								href="/blog"
+								className="rounded-lg px-3 py-2 text-sm text-[var(--text-soft)] hover:bg-[var(--surface)] hover:text-[var(--text)]"
+							>
+								Blog
 							</Link>
 							<Link
 								href="/about"

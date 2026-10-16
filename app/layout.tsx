@@ -3,6 +3,7 @@ import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 import { SiteFooter } from "./components/site-footer";
+import { SmoothScroll } from "./components/smooth-scroll";
 
 var name = "Israel Oladele"
 
@@ -83,6 +84,7 @@ export default function RootLayout({
       >
         <div className="flex flex-1 flex-col">{children}</div>
         <SiteFooter />
+        <SmoothScroll />
       </body>
     </html>
   );
