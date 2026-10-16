@@ -197,7 +197,7 @@ export function AboutReveal() {
 														</strong>
 														, and{" "}
 														<strong className="font-semibold text-[var(--text)]">
-															Medical professional
+															Medical Student
 														</strong>
 														{" "}
 														who brings technology,
