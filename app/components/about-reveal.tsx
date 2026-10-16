@@ -92,7 +92,7 @@ export function AboutReveal() {
 										duration: reduceMotion ? 0 : 0.55,
 										delay: duration * 0.5,
 									}}
-									className="relative mx-auto w-[95vw] max-w-none px-0 pb-[2.5vh] pt-[2.5vh]"
+									className="relative mx-auto w-[95vw] max-w-none px-0 pb-[2.5vh] pt-2"
 								>
 									<div className="relative mx-auto">
 										<div
@@ -105,7 +105,7 @@ export function AboutReveal() {
 										/>
 
 										<article className="relative min-h-[95vh] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-strong)] text-[var(--text)] shadow-2xl shadow-black/15">
-											<div className="relative flex h-12 items-center justify-center border-b border-[var(--border)] bg-[var(--surface)] px-3 sm:h-14 sm:px-5">
+											<div className="relative flex h-12 items-center justify-center border-b border-[var(--border)] bg-[var(--surface)] px-3 sm:px-5">
 												<button
 													ref={closeButtonRef}
 													type="button"
@@ -197,7 +197,7 @@ export function AboutReveal() {
 														</strong>
 														, and{" "}
 														<strong className="font-semibold text-[var(--text)]">
-															Medical Student
+															Medical Doctor
 														</strong>
 														{" "}
 														who brings technology,
