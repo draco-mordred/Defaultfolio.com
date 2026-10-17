@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { allBlogPosts } from "contentlayer/generated";
 import { Mdx } from "@/app/components/mdx";
 import { Navigation } from "@/app/components/nav";
+import { BlogCommunity } from "./community";
 import "./mdx.css";
 
 type Props = {
@@ -71,9 +72,16 @@ export default function BlogPostPage({ params }: Props) {
 						</p>
 					</header>
 
-					<div className="blog-article-content mx-auto mt-10 max-w-3xl">
+					<div
+						id="blog-article-content"
+						className="blog-article-content mx-auto mt-10 max-w-3xl"
+					>
 						<Mdx code={post.body.code} />
 					</div>
+					<BlogCommunity
+						slug={post.slug}
+						siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
+					/>
 				</article>
 			</main>
 		</>
