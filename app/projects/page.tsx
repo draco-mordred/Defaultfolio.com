@@ -43,8 +43,7 @@ export default async function ProjectsPage() {
             Projects
           </h2>
           <p className="mt-4 text-[var(--text-soft)]">
-            Some of the projects
- are from work and some are on my own time.
+            Some of the projects are from work and some are on my own time.
           </p>
         </div>
         <div className="w-full h-px bg-[var(--border)]" />
@@ -82,8 +81,7 @@ export default async function ProjectsPage() {
                     <div className="flex items-center justify-between gap-2">
                       <div className="text-xs text-[var(--project-feature-soft)]">
                         {featured.date ? (
-                          <time dateTime={new Date(featured.date).toI
-SOString()}>
+                          <time dateTime={new Date(featured.date).toISOString()}>
                             {Intl.DateTimeFormat(undefined, {
                               dateStyle: "medium",
                             }).format(new Date(featured.date))}
@@ -123,8 +121,7 @@ SOString()}>
                   <div className="flex items-center justify-between gap-2">
                     <div className="text-xs text-[var(--text-soft)]">
                       {featured.date ? (
-            
-            <time dateTime={new Date(featured.date).toISOString()}>
+                        <time dateTime={new Date(featured.date).toISOString()}>
                           {Intl.DateTimeFormat(undefined, {
                             dateStyle: "medium",
                           }).format(new Date(featured.date))}
@@ -166,8 +163,7 @@ SOString()}>
                 <Article
                   project={{ ...project, title: topOverrides[project.slug]?.title ?? project.title }}
                   views={views[project.slug] ?? 0}
-                  externalHref={topOve
-rrides[project.slug]?.external}
+                  externalHref={topOverrides[project.slug]?.external}
                 />
               </Card>
             ))}
