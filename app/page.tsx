@@ -10,6 +10,7 @@ import Particles from "./components/particles";
 import { SkillsCarousel } from "./components/skills-carousel";
 import { AboutReveal } from "./components/about-reveal";
 import { ThemeToggle } from "./components/nav";
+import { FeaturedCarouselCard } from "./components/featured-luna-card";
 
 const navigation = [
   { label: "Projects", href: "/projects" },
@@ -35,6 +36,42 @@ const featuredProjects = [
   },
 ];
 
+const FALLBACK_LUNA_SCREENSHOTS = [
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/tracks.png",
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/albums.png",
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/lyrics-synced.png",
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/album-tracklist.png",
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/nowplaying-mobile.png",
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/tracks-mobile.png",
+];
+
+/**
+ * Fetches the current screenshot list from the Luna repository so the
+ * home page carousel always reflects the latest screenshots on GitHub.
+ * Cached for an hour and falls back to a known-good list on failure.
+ */
+async function getLunaScreenshots(): Promise<string[]> {
+  try {
+    const res = await fetch(
+      "https://api.github.com/repos/draco-mordred/Luna/contents/screenshots",
+      { next: { revalidate: 3600 } },
+    );
+    if (!res.ok) {
+      return FALLBACK_LUNA_SCREENSHOTS;
+    }
+    const files = await res.json();
+    const urls = (Array.isArray(files) ? files : [])
+      .filter(
+        (file: { name?: string; download_url?: string }) =>
+          file.download_url && /\.(png|jpe?g|gif|webp)$/i.test(file.name ?? ""),
+      )
+      .map((file: { download_url?: string }) => file.download_url as string);
+    return urls.length > 0 ? urls : FALLBACK_LUNA_SCREENSHOTS;
+  } catch {
+    return FALLBACK_LUNA_SCREENSHOTS;
+  }
+}
+
 function NavigationLinks({ mobile = false }: { mobile?: boolean }) {
   return (
     <>
@@ -52,8 +89,10 @@ function NavigationLinks({ mobile = false }: { mobile?: boolean }) {
     </>
   );
 }
-  
-export default function Home() {
+
+export default async function Home() {
+  const lunaScreenshots = await getLunaScreenshots();
+
   return (
     <div className="home-page-background home-content-revealed relative isolate flex w-full flex-1 flex-col items-center overflow-x-clip">
       <Particles
@@ -175,6 +214,13 @@ export default function Home() {
             Featured Projects
           </h2>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 sm:gap-4">
+            <FeaturedCarouselCard
+              screenshots={lunaScreenshots}
+              name="Luna Music"
+              description="A music player for enjoying a personal music collection in a clean, customizable interface, with lyrics, visualizations, and full Now Playing view."
+              tags={["Music player", "Desktop app", "Open source"]}
+              href="/projects/luna"
+            />
             {featuredProjects.map((project) => (
               <a
                 key={project.name}
