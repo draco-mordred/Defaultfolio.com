@@ -12,8 +12,10 @@ type Props = {
 	};
 
 	views: number;
+	backgroundImages?: string[];
 };
-export const Header: React.FC<Props> = ({ project, views }) => {
+
+export const Header: React.FC<Props> = ({ project, views, backgroundImages }) => {
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
 
@@ -48,6 +50,31 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 			ref={ref}
 			className="relative isolate overflow-hidden bg-gradient-to-tl from-[var(--bg-strong)] via-[var(--bg)] to-[var(--bg-strong)]"
 		>
+			{backgroundImages && backgroundImages.length > 0 && (
+				<div
+					aria-hidden="true"
+					className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+				>
+					<div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 p-8 -rotate-3 scale-125">
+						{backgroundImages.map((src, i) => (
+							<img
+								key={src}
+								src={src}
+								alt=""
+								loading="lazy"
+								className="w-64 md:w-80 h-40 md:h-48 object-cover rounded-xl shadow-2xl opacity-25"
+								style={{ transform: `rotate(${i % 2 === 0 ? 3 : -4}deg)` }}
+							/>
+						))}
+					</div>
+				</div>
+			)}
+			{backgroundImages && backgroundImages.length > 0 && (
+				<div
+					aria-hidden="true"
+					className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[var(--bg)] via-transparent to-[var(--bg)]"
+				/>
+			)}
 			<div
 				className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
 					isIntersecting
@@ -90,10 +117,10 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 			<div className="container mx-auto relative isolate overflow-hidden py-24 sm:py-32">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8 text-center flex flex-col items-center">
 					<div className="mx-auto max-w-2xl lg:mx-0">
-						<h1 className="text-4xl font-bold tracking-tight text-[var(--text)] sm:text-6xl font-display">
+						<h1 className="text-4xl font-bold tracking-tight text-[var(--text)] sm:text-6xl font-display drop-shadow-lg">
 							{project.title}
 						</h1>
-						<p className="mt-6 text-lg leading-8 text-[var(--text-soft)]">
+						<p className="mt-6 text-lg leading-8 text-[var(--text-soft)] drop-shadow-md">
 							{project.description}
 						</p>
 					</div>
