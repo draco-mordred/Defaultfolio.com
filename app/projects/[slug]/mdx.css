@@ -41,11 +41,26 @@ article.prose details[open] summary {
   margin-bottom: 1rem;
 }
 
+/* Inline code chips: neutral translucent background that works in both
+   light and dark themes (the default prose chip is light gray, which
+   swallowed white code text in dark mode). */
+article.prose :not(pre) > code {
+  background-color: rgba(127, 127, 127, 0.16);
+  border-radius: 0.375rem;
+  padding: 0.2em 0.4em;
+}
+
 [data-rehype-pretty-code-fragment] code {
   @apply grid min-w-full break-words rounded-none border-0 bg-transparent p-0 text-sm text-[var(--text)];
   counter-reset: line;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+}
+
+/* Fenced code blocks keep the shiki "github-dark" background (inline style),
+   which is readable in both themes; just frame them with the theme border. */
+[data-rehype-pretty-code-fragment] pre {
+  @apply my-4 rounded-xl border border-[var(--border)];
 }
 
 [data-rehype-pretty-code-fragment] .line {

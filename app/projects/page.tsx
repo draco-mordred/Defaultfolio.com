@@ -9,6 +9,16 @@ import { ArrowUpRight, Eye } from "lucide-react";
 import { getProjectPageviews } from "@/util/project-pageviews";
 
 export const revalidate = 60;
+
+const LUNA_SCREENSHOTS = [
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/tracks.png",
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/albums.png",
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/lyrics-synced.png",
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/album-tracklist.png",
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/nowplaying-mobile.png",
+  "https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/tracks-mobile.png",
+];
+
 export default async function ProjectsPage() {
   const views = await getProjectPageviews(allProjects.map((project) => project.slug));
 
@@ -164,6 +174,9 @@ export default async function ProjectsPage() {
                   project={{ ...project, title: topOverrides[project.slug]?.title ?? project.title }}
                   views={views[project.slug] ?? 0}
                   externalHref={topOverrides[project.slug]?.external}
+                  backgroundImages={
+                    project.slug === "luna" ? LUNA_SCREENSHOTS : undefined
+                  }
                 />
               </Card>
             ))}
