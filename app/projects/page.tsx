@@ -13,11 +13,10 @@ export default async function ProjectsPage() {
   const views = await getProjectPageviews(allProjects.map((project) => project.slug));
 
   const featured = allProjects.find((project) => project.slug === "unkey")!;
-  const top2 = allProjects.find((project) => project.slug === "planetfall")!;
+  const top2 = allProjects.find((project) => project.slug === "luna")!;
   const top3 = allProjects.find((project) => project.slug === "highstorm")!;
   const topOverrides: Record<string, { title?: string; external?: string }> = {
     unkey: { title: "MedLog LMS", external: "https://medloglms.vercel.app" },
-    planetfall: { title: "Luna: a music player", external: "https://luna.vercel.app" },
     highstorm: { title: "Health Care manager", external: "https://hospital.vercel.app" },
   };
   const sorted = allProjects
@@ -44,7 +43,8 @@ export default async function ProjectsPage() {
             Projects
           </h2>
           <p className="mt-4 text-[var(--text-soft)]">
-            Some of the projects are from work and some are on my own time.
+            Some of the projects
+ are from work and some are on my own time.
           </p>
         </div>
         <div className="w-full h-px bg-[var(--border)]" />
@@ -82,7 +82,8 @@ export default async function ProjectsPage() {
                     <div className="flex items-center justify-between gap-2">
                       <div className="text-xs text-[var(--project-feature-soft)]">
                         {featured.date ? (
-                          <time dateTime={new Date(featured.date).toISOString()}>
+                          <time dateTime={new Date(featured.date).toI
+SOString()}>
                             {Intl.DateTimeFormat(undefined, {
                               dateStyle: "medium",
                             }).format(new Date(featured.date))}
@@ -122,7 +123,8 @@ export default async function ProjectsPage() {
                   <div className="flex items-center justify-between gap-2">
                     <div className="text-xs text-[var(--text-soft)]">
                       {featured.date ? (
-                        <time dateTime={new Date(featured.date).toISOString()}>
+            
+            <time dateTime={new Date(featured.date).toISOString()}>
                           {Intl.DateTimeFormat(undefined, {
                             dateStyle: "medium",
                           }).format(new Date(featured.date))}
@@ -164,7 +166,8 @@ export default async function ProjectsPage() {
                 <Article
                   project={{ ...project, title: topOverrides[project.slug]?.title ?? project.title }}
                   views={views[project.slug] ?? 0}
-                  externalHref={topOverrides[project.slug]?.external}
+                  externalHref={topOve
+rrides[project.slug]?.external}
                 />
               </Card>
             ))}

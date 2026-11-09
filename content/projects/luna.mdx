@@ -1,0 +1,107 @@
+---
+title: Luna Music
+description: A music player for enjoying a personal music collection in a clean, customizable interface. Browse local tracks and albums, explore artist details, and move from a compact PlayBar to a full Now Playing view with lyrics and visualizations.
+date: "2026-11-08"
+url: https://github.com/draco-mordred/Luna
+published: true
+repository: draco-mordred/Luna
+---
+
+Luna is a music player for enjoying a personal music collection in a clean, customizable interface. Browse local tracks and albums, explore artist details, and move from a compact PlayBar to a full Now Playing view with lyrics and visualizations. Luna runs as a desktop app and can also be run in a web browser. The Electron desktop app scans selected folders; the Android app scans audio indexed by Android's media library.
+
+## Features
+
+- **Your local library:** Scan music folders, browse tracks and albums, and organize your listening with search, playlists, shuffle, repeat, and a play queue.
+- **A player that stays close:** Keep playback in the bottom PlayBar or expand it into Now Playing. In the Electron app, switch to a mini player capped at 640 x 490 pixels or a fullscreen player.
+- **Lyrics your way:** Display embedded plain or timestamped lyrics, switch between plain and synchronized modes, and adjust synchronized lyric timing.
+- **Personalized playback:** Choose themes, accent colors, transport icon styles, seek bar designs, and audio visualizer styles.
+- **Rich track details:** View album artwork and metadata, edit supported audio tags and embedded lyrics, and explore artist images and biographies.
+- **Discover more music:** Connect to Jamendo or Audiomack for online catalog search and streaming.
+- **Desktop integration:** On Windows, use playback controls from the taskbar preview and install Luna through the branded setup wizard.
+- **Responsive layouts:** Use Luna in a desktop window or a narrower mobile-sized layout.
+
+## Screenshots
+
+![Desktop library with the Tracks view and bottom PlayBar](https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/tracks.png)
+
+![Desktop library with album artwork cards](https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/albums.png)
+
+![Album details and track list](https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/album-tracklist.png)
+
+![Now Playing with synchronized lyrics](https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/lyrics-synced.png)
+
+![Luna library and player in a narrow layout](https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/tracks-mobile.png)
+
+![Luna albums in a narrow layout](https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/albums-mobile.png)
+
+![Luna Now Playing in a narrow layout](https://raw.githubusercontent.com/draco-mordred/Luna/main/screenshots/nowplaying-mobile.png)
+
+<details>
+<summary>View the full README from GitHub</summary>
+
+## Luna Music
+
+Your music library, beautifully at home on your desktop.
+
+[![Latest release](https://img.shields.io/github/v/release/draco-mordred/Luna?style=for-the-badge&color=7857D6&label=Latest%20release)](https://github.com/draco-mordred/Luna/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/draco-mordred/Luna/total?style=for-the-badge&color=7857D6&label=Downloads)](https://github.com/draco-mordred/Luna/releases)
+[![MIT License](https://img.shields.io/github/license/draco-mordred/Luna?style=for-the-badge&color=7857D6)](https://github.com/draco-mordred/Luna/blob/main/LICENSE.md)
+
+Luna is a music player for enjoying a personal music collection in a clean, customizable interface. Browse local tracks and albums, explore artist details, and move from a compact PlayBar to a full Now Playing view with lyrics and visualizations. Luna runs as a desktop app and can also be run in a web browser. The Electron desktop app scans selected folders; the Android app scans audio indexed by Android's media library.
+
+### Getting started
+
+1. Download and run the Windows installer from the [latest release](https://github.com/draco-mordred/Luna/releases/latest).
+2. On first launch, select one or more folders containing your music.
+3. Browse your library and start listening. Customize the app from **Settings**.
+
+Luna indexes supported audio files in selected folders. In the desktop app, right-click a track to edit supported metadata and embedded lyrics. Changes are written to the audio file itself. MP3, FLAC, M4A/MP4, and OGG/OGA files support metadata editing; other supported library formats may still be playable.
+
+On supported Windows 11 versions, choose **Default**, **Mica**, or **Frosty** in **Settings - Appearance - App background material**. Both material modes use Windows' native window frame and rounded corners; Luna must restart to apply a selection.
+
+The Windows setup installer registers Luna for the audio formats it supports. To make Luna the default, open **Settings - Appearance - Default audio player**, then choose Luna for each desired format in Windows **Default apps**.
+
+### Privacy and online services
+
+Your local music library is indexed on your device. Online features are optional and use third-party services:
+
+- Artist images and biographies may be looked up through the English Wikipedia API and Wikimedia Commons.
+- Jamendo and Audiomack search and playback use their respective APIs and are subject to provider terms, access requirements, and licensing.
+
+### Building from source
+
+Requirements: Node.js and npm; Windows for building the Windows installer; for Android, Android Studio, Android SDK Platform 34 or newer, and JDK 17.
+
+Run the desktop app in development:
+
+```bash
+npm install
+npm run dev
+```
+
+Build the production app and installers:
+
+```bash
+npm run electron:build
+```
+
+The Windows installer is written to `dist/`. To make a build available to users, publish a GitHub Release and attach the installer executable as a release asset.
+
+### Support
+
+Found a problem or have a feature request? [Open an issue](https://github.com/draco-mordred/Luna/issues).
+
+### License
+
+Luna is distributed under the [MIT License](https://github.com/draco-mordred/Luna/blob/main/LICENSE.md).
+
+</details>
+
+## Get it on GitHub
+
+Luna is open source. View the source code, download the latest Windows installer, or grab the release for your platform:
+
+- **Repository:** [github.com/draco-mordred/Luna](https://github.com/draco-mordred/Luna)
+- **Download:** [Latest release and installers](https://github.com/draco-mordred/Luna/releases/latest)
+
+[Open Luna on GitHub](https://github.com/draco-mordred/Luna) to browse the code, and [download the latest release](https://github.com/draco-mordred/Luna/releases/latest) to try it out.
